@@ -53,7 +53,7 @@ public class GraphServer extends UnicastRemoteObject implements GraphService {
             // Register the server object with RMI Registry
             System.setProperty("java.rmi.server.hostname","127.0.0.1");
             LocateRegistry.createRegistry(config.getRmiregistryPort());
-            Naming.rebind("//" + config.getServerAddress() + ":" + config.getServerPort() + "/GraphService", server);
+            Naming.rebind("//" + config.getServerAddress() + ":" + config.getRmiregistryPort() + "/GraphService", server);
             System.out.println("Graph server started...");
         } catch (Exception e) {
             System.err.println("Graph server exception: " + e.toString());

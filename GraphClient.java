@@ -7,7 +7,7 @@ public class GraphClient {
     public static void main(String[] args) {
         try {
             Configuration config = new Configuration();
-            GraphService graphService = (GraphService) Naming.lookup("//" + config.getServerAddress() + ":" + config.getServerPort() + "/GraphService");
+            GraphService graphService = (GraphService) Naming.lookup("//" + config.getServerAddress() + ":" + config.getRmiregistryPort() + "/GraphService");
 
             // Read initial graph from file and add edges to the server
             String initialGraphFile = "initial_graph.txt";
