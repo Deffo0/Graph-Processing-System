@@ -24,9 +24,8 @@ public class GraphClient {
             while (true) {
                 long startTime = System.currentTimeMillis();
 
-                // Read instructions from file and send to server
-                // Measure elapsed time
-                // Log results
+                // TODO: Read instructions from file and send to server
+                // TODO: Log results
 
                 long elapsedTime = System.currentTimeMillis() - startTime;
                 System.out.println("Time elapsed: " + elapsedTime + " milliseconds");
