@@ -23,8 +23,31 @@ public class GraphClient {
             // Repeat the process
             while (true) {
                 long startTime = System.currentTimeMillis();
+                //Read instructions from file and send to server
+                try (BufferedReader reader = new BufferedReader(new FileReader(instructionsFile))) {
+                    String line;
+                    while (!Objects.equals(line = reader.readLine(), "F")) {
+                        String[] tokens = line.split(" ");
+                        char operation = tokens[0].charAt(0);
+                        int src = Integer.parseInt(tokens[1]);
+                        int dest = Integer.parseInt(tokens[2]);
+                        switch (operation) {
+                            case 'A':
+                                graphService.addEdge(src, dest);
+                                break;
+                            case 'D':
+                                graphService.removeEdge(src, dest);
+                                break;
+                            case 'Q':
+                                int shortestPath = graphService.shortestPath(src, dest);
+                                System.out.println("Shortest path from " + src + " to " + dest + ": " + shortestPath);
+                                break;
+                            default:
+                                System.out.println("Invalid operation: " + operation);
+                        }
+                    }
+                }
 
-                // TODO: Read instructions from file and send to server
                 // TODO: Log results
 
                 long elapsedTime = System.currentTimeMillis() - startTime;
