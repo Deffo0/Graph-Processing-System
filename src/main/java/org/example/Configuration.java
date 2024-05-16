@@ -1,16 +1,18 @@
+package org.example;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
 public class Configuration {
-    private static final String CONFIG_FILE = "system.properties";
+    private static final String CONFIG_FILE = "src/main/resources/system.properties";
 
     private String serverAddress;
     private int serverPort;
+    private String serverName;
     private int numberOfNodes;
     private String[] nodeAddresses;
-    private int rmiregistryPort;
-
+    private int rmiRegistryPort;
     public Configuration() {
         loadConfiguration();
     }
@@ -21,12 +23,13 @@ public class Configuration {
             properties.load(fis);
             serverAddress = properties.getProperty("GSP.server");
             serverPort = Integer.parseInt(properties.getProperty("GSP.server.port"));
-            numberOfNodes = Integer.parseInt(properties.getProperty("GSP.numberOfnodes"));
+            serverName = properties.getProperty("GSP.server.name");
+            numberOfNodes = Integer.parseInt(properties.getProperty("GSP.numberOfNodes"));
             nodeAddresses = new String[numberOfNodes];
             for (int i = 0; i < numberOfNodes; i++) {
                 nodeAddresses[i] = properties.getProperty("GSP.node" + i);
             }
-            rmiregistryPort = Integer.parseInt(properties.getProperty("GSP.rmiregistry.port"));
+            rmiRegistryPort = Integer.parseInt(properties.getProperty("GSP.rmiRegistry.port"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -40,6 +43,10 @@ public class Configuration {
         return serverPort;
     }
 
+    public String getServerName() {
+        return serverName;
+    }
+
     public int getNumberOfNodes() {
         return numberOfNodes;
     }
@@ -48,7 +55,7 @@ public class Configuration {
         return nodeAddresses;
     }
 
-    public int getRmiregistryPort() {
-        return rmiregistryPort;
+    public int getRmiRegistryPort() {
+        return rmiRegistryPort;
     }
 }

@@ -1,0 +1,96 @@
+package org.example.client;
+
+import org.example.RMIInterface.GraphBatchProcessor;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.rmi.NotBoundException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.List;
+import java.util.Random;
+import java.util.logging.*;
+
+public class GSPClient {
+    private final Logger logger;
+
+    public GSPClient() {
+        super();
+        this.logger = Logger.getLogger(GSPClient.class.getName());
+    }
+
+    public static void main(String[] args) throws NotBoundException, IOException {
+        Logger logger = Logger.getLogger(GSPClient.class.getName());
+        if (args.length != 5) {
+            logger.severe("Usage: java -jar client.jar <clientId> <clientAddress> <serverAddress> <rmiRegistryPort> <serviceName>");
+            return;
+        }
+
+        String clientId = args[0];
+        String serverAddress = args[2];
+        int rmiRegistryPort = Integer.parseInt(args[3]);
+        String name = args[4];
+        String batch = generateBatch(clientId, logger);
+
+        GSPClient client = new GSPClient();
+        client.initLogger(clientId);
+
+        Registry registry = LocateRegistry.getRegistry(serverAddress, rmiRegistryPort);
+        GraphBatchProcessor graphBatchProcessor = (GraphBatchProcessor) registry.lookup(name);
+
+        try {
+            logger.info("Processing batch:\n" + batch);
+            long startTime = System.currentTimeMillis();
+            List<Integer> result = graphBatchProcessor.processBatch(batch);
+            long endTime = System.currentTimeMillis();
+            logger.info("Result: " + result.toString() + ", Time taken: " + (endTime - startTime) + "ms");
+        } catch (Exception e) {
+            logger.severe("An error occurred: " + e.getMessage());
+        }
+    }
+
+    private static String generateBatch(String clientId, Logger logger) {
+        String fileName = "src/main/resources/instructions_" + clientId + ".txt";
+        try {
+            return generateRandomInstructions(fileName);
+        } catch (Exception e) {
+            logger.severe("An error occurred: " + e.getMessage());
+        }
+
+        return "null";
+    }
+
+    private static String generateRandomInstructions(String fileName) throws Exception {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+            StringBuilder batchString = new StringBuilder();
+            Random random = new Random();
+            for (int i = 0; i < 10; i++) {
+                char operation = random.nextBoolean() ? 'A' : 'D'; // Randomly choose add or delete operation
+                int src = random.nextInt(10); // Random source node
+                int dest = random.nextInt(10); // Random destination node
+                writer.write(operation + " " + src + " " + dest);
+                writer.newLine();
+                batchString.append(operation).append(" ").append(src).append(" ").append(dest).append("\n");
+            }
+            // Add queries for shortest path
+            for (int i = 0; i < 5; i++) {
+                int src = random.nextInt(10); // Random source node
+                int dest = random.nextInt(10); // Random destination node
+                writer.write("Q" + " " + src + " " + dest);
+                writer.newLine();
+                batchString.append("Q").append(" ").append(src).append(" ").append(dest).append("\n");
+            }
+            writer.write("F");
+
+            return batchString.toString();
+        }
+    }
+
+    private void initLogger(String clientId) throws IOException {
+        logger.setLevel(Level.INFO);
+        Handler fileHandler = new FileHandler("src/main/resources/GSPClient_" + clientId + ".log");
+        logger.addHandler(fileHandler);
+        fileHandler.setFormatter(new SimpleFormatter());
+    }
+}
