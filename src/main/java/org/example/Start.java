@@ -8,8 +8,9 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class Start {
+    private final static Logger logger = Logger.getLogger(Start.class.getName());
     public static void main(String[] args) throws IOException, InterruptedException {
-        Logger logger = Logger.getLogger(Start.class.getName());
+
         Configuration configuration = new Configuration();
         String classpath = System.getProperty("java.class.path");
         
@@ -24,7 +25,7 @@ public class Start {
         // );
         // serverProcessBuilder.redirectErrorStream(true);
         // Process serverProcess = serverProcessBuilder.start();
-
+        logger.info("Starting server...");
         GSPServer.main(
                 new String[] {
                         configuration.getServerAddress(),
@@ -32,15 +33,17 @@ public class Start {
                         String.valueOf(configuration.getRmiRegistryPort())
                 }
         );
-
+        logger.info("Server started.");
         Thread.sleep(2000);
 
         try {
+            logger.info("Starting clients...");
             List<Process> clientProcesses = getClientProcesses(configuration, classpath);
-
+            logger.info("Clients started.");
             for (Process clientProcess : clientProcesses) {
                 clientProcess.waitFor();
             }
+            logger.info("All clients finished.");
 
             // serverProcess.waitFor();
         } catch (IOException | InterruptedException e) {
@@ -56,7 +59,7 @@ public class Start {
 
         for (int i = 0; i < nodeAddresses.length; i++) {
             String nodeAddress = nodeAddresses[i];
-
+            logger.info("Starting client " + i + "...");
             ProcessBuilder clientProcessBuilder = new ProcessBuilder(
                     "java",
                     "-cp",
@@ -68,9 +71,9 @@ public class Start {
                     String.valueOf(configuration.getRmiRegistryPort()),
                     configuration.getServerName()
             );
-
             clientProcessBuilder.redirectErrorStream(true);
             Process clientProcess = clientProcessBuilder.start();
+            logger.info("Client " + i + " started.");
             clientProcesses.add(clientProcess);
         }
         return clientProcesses;
