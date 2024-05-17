@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class Main {
+public class Start {
     public static void main(String[] args) throws IOException, InterruptedException {
-        Logger logger = Logger.getLogger(Main.class.getName());
+        Logger logger = Logger.getLogger(Start.class.getName());
         Configuration configuration = new Configuration();
         String classpath = System.getProperty("java.class.path");
         
