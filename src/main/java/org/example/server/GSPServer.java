@@ -61,19 +61,34 @@ public class GSPServer implements GraphBatchProcessor {
 
     @Override
     public List<Integer> processBatch(String batch) throws RemoteException {
-        if (!batch.endsWith("\n")) {
-            batch += "\n";
-        }
+        // if (!batch.endsWith("\n")) {
+        //     batch += "\n";
+        // }
 
         String[] lines = batch.split("\n");
         List<Integer> result = new ArrayList<>();
 
         for (String line : lines) {
             logger.info("Processing line: " + line);
+            if(line.trim().isEmpty()){
+                logger.warning("Empty line");
+                continue;
+            }
             String[] parts = line.split(" ");
             char operation = parts[0].charAt(0);
-            int src = Integer.parseInt(parts[1]);
-            int dest = Integer.parseInt(parts[2]);
+
+            int src = -1, dest = -1;
+            if(operation == 'Q' || operation == 'A' || operation == 'D'){
+                if(parts.length == 3){
+                    src = Integer.parseInt(parts[1]);
+                    dest = Integer.parseInt(parts[2]);
+                }else{
+                    logger.warning("Invalid operation: " + operation);
+                    continue;
+                }
+
+            }
+
             long operationStartTime = System.currentTimeMillis();
 
             switch (operation) {

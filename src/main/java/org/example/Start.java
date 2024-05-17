@@ -2,7 +2,9 @@ package org.example;
 
 import org.example.server.GSPServer;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -49,7 +51,7 @@ public class Start {
         //         }
         // );
         logger.info("Server started.");
-        Thread.sleep(2000);
+        Thread.sleep(5000);
 
         try {
             logger.info("Starting clients...");
@@ -84,7 +86,9 @@ public class Start {
                     nodeAddress,
                     configuration.getServerAddress(),
                     String.valueOf(configuration.getRmiRegistryPort()),
-                    configuration.getServerName()
+                    configuration.getServerName(),
+                    String.valueOf(configuration.getMaxGraphNodes()),
+                    String.valueOf(configuration.getWritePercentage())
             );
             clientProcessBuilder.redirectErrorStream(true);
             Process clientProcess = clientProcessBuilder.start();
