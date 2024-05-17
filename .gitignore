@@ -1,4 +1,6 @@
 .idea/
+.vscode/
+target/
 out/
 .git/
 DS_Project.iml
@@ -8,3 +10,7 @@ src/main/resources/instructions_0.txt
 src/main/resources/instructions_1.txt
 src/main/resources/instructions_2.txt
 src/main/resources/instructions_3.txt
+
+# Compiled class file
+*.class
+
