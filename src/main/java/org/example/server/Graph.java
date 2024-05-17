@@ -32,8 +32,9 @@ public class Graph {
             String[] parts = line.split(" ");
             int src = Integer.parseInt(parts[0]);
             int dest = Integer.parseInt(parts[1]);
+            logger.info("Adding edge: " + src + " -> " + dest);
             addEdge(src, dest);
-            logger.info("A " + src + " " + dest);
+            logger.info("Added edge: " + src + " -> " + dest);
         }
     }
 
