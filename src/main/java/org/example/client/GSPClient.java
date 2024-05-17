@@ -30,9 +30,17 @@ public class GSPClient {
         int rmiRegistryPort = Integer.parseInt(args[3]);
         String name = args[4];
         initLogger(clientId);
+        logger.info("Client started");
+        logger.info("Client ID: " + clientId);
+        logger.info("Server address: " + serverAddress);
+        logger.info("RMI registry port: " + rmiRegistryPort);
+        logger.info("Service name: " + name);
+        logger.info("Generating batch...");
         String batch = generateBatch(clientId);
-
+        logger.info("Batch generated");
+        logger.info("Connecting to server...");
         Registry registry = LocateRegistry.getRegistry(serverAddress, rmiRegistryPort);
+        logger.info("Looking up service: " + name);
         GraphBatchProcessor graphBatchProcessor = (GraphBatchProcessor) registry.lookup(name);
 
         try {
