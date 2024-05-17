@@ -7,6 +7,9 @@ RUN   mkdir -p src/main/resources
 
 COPY ./target/classes/system.properties /app/src/main/resources/system.properties
 COPY ./target/classes/graph.txt /app/src/main/resources/graph.txt
+# COPY entrypoint.sh /app/entrypoint.sh
 
-CMD ["java", "-cp", "/app.jar", "org.example.server.GSPServer"]
+# RUN chmod +x /app/entrypoint.sh
+
+ENTRYPOINT ["java", "-cp", "/app.jar", "org.example.server.GSPServer"]
 
