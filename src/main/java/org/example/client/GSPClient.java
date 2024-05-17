@@ -15,16 +15,16 @@ import java.util.logging.*;
 public class GSPClient {
     private static final Logger logger = Logger.getLogger(GSPClient.class.getName());
     private static Random rngRequests, rngWrites, rngSleep;
-    private static int writePercentage, maxGraphNodes;
+    private static int writePercentage, maxGraphNodes, numberOfRequests;
 
     public GSPClient() {
         super();
     }
 
     public static void main(String[] args) throws NotBoundException, IOException {
-        if (args.length != 7) {
+        if (args.length != 8) {
             logger.severe(
-                    "Usage: java -jar client.jar <clientId> <clientAddress> <serverAddress> <rmiRegistryPort> <serviceName> <maxGraphNodes> <writePercentage>");
+                    "Usage: java -jar client.jar <clientId> <clientAddress> <serverAddress> <rmiRegistryPort> <serviceName> <maxGraphNodes> <writePercentage> <numberOfRequests>");
             return;
         }
         String clientId = args[0];
@@ -32,6 +32,7 @@ public class GSPClient {
         String serverAddress = args[2];
         int rmiRegistryPort = Integer.parseInt(args[3]);
         String name = args[4];
+        numberOfRequests = Integer.parseInt(args[7]);
         maxGraphNodes = Integer.parseInt(args[5]);
         writePercentage = Integer.parseInt(args[6]);
 
@@ -51,7 +52,8 @@ public class GSPClient {
         logger.info("Looking up service: " + name);
         GraphBatchProcessor graphBatchProcessor = (GraphBatchProcessor) registry.lookup(name);
 
-        while (true) {
+        // set number of requests to -ve value to run indefinitely
+        for(int i = 0; i != numberOfRequests; i++) {
             logger.info("Generating batch...");
             String batch = generateBatch(clientId);
             logger.info("Batch generated");

@@ -41,7 +41,17 @@ public class Start {
         System.out.println(serverProcessBuilder.command());
         serverProcessBuilder.redirectErrorStream(true);
         Process serverProcess = serverProcessBuilder.start();
-        
+
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(serverProcess.getInputStream()))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(" ");
+                if(parts.length == 2 && parts[1].toLowerCase().equals("r")){
+                    logger.info("Server started.");
+                    break;
+                }
+            }
+        }
         // System.out.println();
         // GSPServer.main(
         //         new String[] {
@@ -50,8 +60,8 @@ public class Start {
         //                 String.valueOf(configuration.getRmiRegistryPort())
         //         }
         // );
-        logger.info("Server started.");
-        Thread.sleep(5000);
+        // logger.info("Server started.");
+        // Thread.sleep(5000);
 
         try {
             logger.info("Starting clients...");
@@ -88,7 +98,8 @@ public class Start {
                     String.valueOf(configuration.getRmiRegistryPort()),
                     configuration.getServerName(),
                     String.valueOf(configuration.getMaxGraphNodes()),
-                    String.valueOf(configuration.getWritePercentage())
+                    String.valueOf(configuration.getWritePercentage()),
+                    "10"
             );
             clientProcessBuilder.redirectErrorStream(true);
             Process clientProcess = clientProcessBuilder.start();
