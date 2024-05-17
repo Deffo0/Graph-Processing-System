@@ -16,17 +16,16 @@ public class GSPServer implements GraphBatchProcessor {
     private static final Logger logger = Logger.getLogger(GSPServer.class.getName());
     private static Graph graph = null;
 
-
-    public GSPServer() throws IOException {
+    public GSPServer() {
         super();
-        initLogger();
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException {
         if (args.length != 3) {
             System.err.println("Usage: java -jar server.jar <serverAddress> <serverPort> <rmiRegistryPort>");
             return;
         }
+        initLogger();
 
         String serverAddress = args[0];
         int serverPort = Integer.parseInt(args[1]);
@@ -48,7 +47,7 @@ public class GSPServer implements GraphBatchProcessor {
         }
     }
 
-    private void initLogger() throws IOException {
+    private static void initLogger() throws IOException {
         logger.setLevel(Level.INFO);
         Handler fileHandler = new FileHandler("src/main/resources/GSPServer.log");
         logger.addHandler(fileHandler);

@@ -13,15 +13,13 @@ import java.util.Random;
 import java.util.logging.*;
 
 public class GSPClient {
-    private final Logger logger;
+    private static final Logger logger = Logger.getLogger(GSPClient.class.getName());
 
     public GSPClient() {
         super();
-        this.logger = Logger.getLogger(GSPClient.class.getName());
     }
 
     public static void main(String[] args) throws NotBoundException, IOException {
-        Logger logger = Logger.getLogger(GSPClient.class.getName());
         if (args.length != 5) {
             logger.severe("Usage: java -jar client.jar <clientId> <clientAddress> <serverAddress> <rmiRegistryPort> <serviceName>");
             return;
@@ -31,10 +29,8 @@ public class GSPClient {
         String serverAddress = args[2];
         int rmiRegistryPort = Integer.parseInt(args[3]);
         String name = args[4];
-        String batch = generateBatch(clientId, logger);
-
-        GSPClient client = new GSPClient();
-        client.initLogger(clientId);
+        initLogger(clientId);
+        String batch = generateBatch(clientId);
 
         Registry registry = LocateRegistry.getRegistry(serverAddress, rmiRegistryPort);
         GraphBatchProcessor graphBatchProcessor = (GraphBatchProcessor) registry.lookup(name);
@@ -50,7 +46,7 @@ public class GSPClient {
         }
     }
 
-    private static String generateBatch(String clientId, Logger logger) {
+    private static String generateBatch(String clientId) {
         String fileName = "src/main/resources/instructions_" + clientId + ".txt";
         try {
             return generateRandomInstructions(fileName);
@@ -87,7 +83,7 @@ public class GSPClient {
         }
     }
 
-    private void initLogger(String clientId) throws IOException {
+    private static void initLogger(String clientId) throws IOException {
         logger.setLevel(Level.INFO);
         Handler fileHandler = new FileHandler("src/main/resources/GSPClient_" + clientId + ".log");
         logger.addHandler(fileHandler);
