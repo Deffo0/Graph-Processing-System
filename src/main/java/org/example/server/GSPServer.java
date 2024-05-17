@@ -1,8 +1,9 @@
 package org.example.server;
 
 import org.example.RMIInterface.GraphBatchProcessor;
+import org.example.log.AnalysisLevel;
+import org.example.log.JsonFormatter;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -54,7 +55,7 @@ public class GSPServer implements GraphBatchProcessor {
 
     private static void initLogger() throws IOException {
         Handler fileHandler = new FileHandler("src/main/resources/GSPServer.log");
-        fileHandler.setFormatter(new SimpleFormatter());
+        fileHandler.setFormatter(new JsonFormatter());
         logger.addHandler(fileHandler);
         logger.setLevel(Level.INFO);
     }
@@ -97,6 +98,8 @@ public class GSPServer implements GraphBatchProcessor {
                     int distance = graph.shortestPath(src, dest, false);
                     result.add(distance);
                     logger.info("Shortest path from " + src + " to " + dest + ": " + distance);
+                    logger.log(AnalysisLevel.ANALYSIS, "This is an ANALYSIS message");
+
                     logger.info("Finished in  " + (System.currentTimeMillis()-operationStartTime) + " milliseconds");
                     break;
                 case 'A':

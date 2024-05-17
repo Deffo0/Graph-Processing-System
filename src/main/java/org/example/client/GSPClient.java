@@ -1,6 +1,7 @@
 package org.example.client;
 
 import org.example.RMIInterface.GraphBatchProcessor;
+import org.example.log.JsonFormatter;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -134,7 +135,7 @@ public class GSPClient {
 
     private static void initLogger(String clientId) throws IOException {
         Handler fileHandler = new FileHandler("src/main/resources/GSPClient_" + clientId + ".log");
-        fileHandler.setFormatter(new SimpleFormatter());
+        fileHandler.setFormatter(new JsonFormatter());
         logger.addHandler(fileHandler);
         logger.setLevel(Level.INFO);
     }
