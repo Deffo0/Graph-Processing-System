@@ -59,8 +59,19 @@ public class Graph {
         }
     }
 
+    public int shortestPath(int src, int dest, boolean fast) {
+        lock.readLock().lock();
+        try {
+            if (fast)
+                return backtrackShortestPath(src, dest);
+            else
+                return BFSShortestPath(src, dest);
+        } finally {
+            lock.readLock().unlock();
+        }
+    }
 
-    public int backtrackShortestPath(int src, int dest) {
+    private int backtrackShortestPath(int src, int dest) {
         lock.readLock().lock();
         try {
             List<Integer> path = new ArrayList<>();
@@ -88,7 +99,7 @@ public class Graph {
         }
     }
 
-    public int BFSShortestPath(int src, int dest) {
+    private int BFSShortestPath(int src, int dest) {
         lock.readLock().lock();
         try {
             if (!adjacencyList.containsKey(src) || !adjacencyList.containsKey(dest)) {

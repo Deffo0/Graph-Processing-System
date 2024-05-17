@@ -72,7 +72,7 @@ public class GSPServer implements GraphBatchProcessor {
 
             switch (operation) {
                 case 'Q':
-                    int distance = graph.BFSShortestPath(src, dest);
+                    int distance = graph.shortestPath(src, dest, false);
                     result.add(distance);
                     logger.info("Q " + src + " " + dest + " , Answer=" + distance);
                     break;
