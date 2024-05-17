@@ -4,7 +4,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-import java.util.logging.Logger;
+import java.util.logging.*;
 
 public class GraphServer extends UnicastRemoteObject implements GraphService {
     private Graph graph;
@@ -60,8 +60,14 @@ public class GraphServer extends UnicastRemoteObject implements GraphService {
 
     public static void main(String[] args) {
         try {
+
             Configuration config = new Configuration();
             GraphServer server = new GraphServer();
+            LOGGER.setLevel(Level.INFO);
+
+            Handler fileHandler = new FileHandler("Server.log");
+            fileHandler.setFormatter(new SimpleFormatter());
+            LOGGER.addHandler(fileHandler);
 
             // Register the server object with RMI Registry
             System.setProperty("java.rmi.server.hostname","127.0.0.1");
