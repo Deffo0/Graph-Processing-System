@@ -1,6 +1,7 @@
 .idea/
 out/
 .git/
+target/
 DS_Project.iml
 *.iml
 *.log
