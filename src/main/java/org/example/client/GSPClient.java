@@ -84,9 +84,9 @@ public class GSPClient {
     }
 
     private static void initLogger(String clientId) throws IOException {
-        logger.setLevel(Level.INFO);
         Handler fileHandler = new FileHandler("src/main/resources/GSPClient_" + clientId + ".log");
-        logger.addHandler(fileHandler);
         fileHandler.setFormatter(new SimpleFormatter());
+        logger.addHandler(fileHandler);
+        logger.setLevel(Level.INFO);
     }
 }
