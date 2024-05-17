@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.server.GSPServer;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,17 +13,25 @@ public class Start {
         Configuration configuration = new Configuration();
         String classpath = System.getProperty("java.class.path");
         
-        ProcessBuilder serverProcessBuilder = new ProcessBuilder(
-                "java",
-                "-cp",
-                classpath,
-                "org.example.server.GSPServer",
-                configuration.getServerAddress(),
-                String.valueOf(configuration.getServerPort()),
-                String.valueOf(configuration.getRmiRegistryPort())
+        // ProcessBuilder serverProcessBuilder = new ProcessBuilder(
+        //         "java",
+        //         "-cp",
+        //         classpath,
+        //         "org.example.server.GSPServer",
+        //         configuration.getServerAddress(),
+        //         String.valueOf(configuration.getServerPort()),
+        //         String.valueOf(configuration.getRmiRegistryPort())
+        // );
+        // serverProcessBuilder.redirectErrorStream(true);
+        // Process serverProcess = serverProcessBuilder.start();
+
+        GSPServer.main(
+                new String[] {
+                        configuration.getServerAddress(),
+                        String.valueOf(configuration.getServerPort()),
+                        String.valueOf(configuration.getRmiRegistryPort())
+                }
         );
-        serverProcessBuilder.redirectErrorStream(true);
-        Process serverProcess = serverProcessBuilder.start();
 
         Thread.sleep(2000);
 
@@ -32,11 +42,11 @@ public class Start {
                 clientProcess.waitFor();
             }
 
-            serverProcess.waitFor();
+            // serverProcess.waitFor();
         } catch (IOException | InterruptedException e) {
             logger.severe("An error occurred: " + e.getMessage());
         } finally {
-            serverProcess.destroy();
+            // serverProcess.destroy();
         }
     }
 
