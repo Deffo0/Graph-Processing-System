@@ -16,14 +16,14 @@ import java.util.logging.*;
 public class GSPClient {
     private static final Logger logger = Logger.getLogger(GSPClient.class.getName());
     private static Random rngRequests, rngWrites, rngSleep;
-    private static int writePercentage, maxGraphNodes, numberOfRequests;
+    private static int writePercentage, maxGraphNodes, numberOfRequests, sleepTime;
 
     public GSPClient() {
         super();
     }
 
     public static void main(String[] args) throws NotBoundException, IOException {
-        if (args.length != 8) {
+        if (args.length != 9) {
             logger.severe(
                     "Usage: java -jar client.jar <clientId> <clientAddress> <serverAddress> <rmiRegistryPort> <serviceName> <maxGraphNodes> <writePercentage> <numberOfRequests>");
             return;
@@ -36,6 +36,7 @@ public class GSPClient {
         numberOfRequests = Integer.parseInt(args[7]);
         maxGraphNodes = Integer.parseInt(args[5]);
         writePercentage = Integer.parseInt(args[6]);
+        sleepTime = Integer.parseInt(args[8]);
 
         rngRequests = new Random(Long.parseLong(clientId));
         rngWrites = new Random(clientAddress.hashCode());
@@ -65,7 +66,7 @@ public class GSPClient {
                 long endTime = System.currentTimeMillis();
                 logger.info("Result: " + result.toString() + ", Time taken: " + (endTime - startTime) + "ms");
 
-                Thread.sleep(1000);
+                Thread.sleep(sleepTime);
 
             } catch (Exception e) {
                 logger.severe("An error occurred: " + e.getLocalizedMessage());

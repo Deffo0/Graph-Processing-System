@@ -93,7 +93,7 @@ public class GSPServer implements GraphBatchProcessor {
             switch (operation) {
                 case 'Q':
                     logger.info("Querying shortest path from " + src + " to " + dest);
-                    int distance = graph.shortestPath(src, dest, false);
+                    int distance = graph.shortestPath(src, dest, true);
                     result.add(distance);
                     logger.info("Shortest path from " + src + " to " + dest + ": " + distance);
 

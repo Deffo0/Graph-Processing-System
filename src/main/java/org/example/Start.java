@@ -12,10 +12,19 @@ import java.util.logging.Logger;
 
 public class Start {
     private final static Logger logger = Logger.getLogger(Start.class.getName());
+    private static int sleepTime, numNodes, writePercentage;
     public static void main(String[] args) throws IOException, InterruptedException {
 
         Configuration configuration = new Configuration();
         String classpath = System.getProperty("java.class.path");
+
+        sleepTime = Integer.parseInt(args[0]);
+        numNodes = Integer.parseInt(args[1]);
+        writePercentage = Integer.parseInt(args[2]);
+
+        logger.info("Sleep time: " + sleepTime);
+        logger.info("Number of nodes: " + numNodes);
+        logger.info("Write percentage: " + writePercentage);
 
         logger.info("Starting server...");
 
@@ -86,8 +95,8 @@ public class Start {
         String[] nodeAddresses = configuration.getNodeAddresses();
         List<Process> clientProcesses = new ArrayList<>();
 
-        for (int i = 0; i < nodeAddresses.length; i++) {
-            String nodeAddress = nodeAddresses[i];
+        for (int i = 0; i < numNodes; i++) {
+            String nodeAddress = nodeAddresses[0];
             logger.info("Starting client " + i + "...");
             ProcessBuilder clientProcessBuilder = new ProcessBuilder(
                     "java",
@@ -100,8 +109,9 @@ public class Start {
                     String.valueOf(configuration.getRmiRegistryPort()),
                     configuration.getServerName(),
                     String.valueOf(configuration.getMaxGraphNodes()),
-                    String.valueOf(configuration.getWritePercentage()),
-                    "10"
+                    String.valueOf(writePercentage),
+                    "10",
+                    String.valueOf(sleepTime)
             );
             clientProcessBuilder.redirectErrorStream(true);
             Process clientProcess = clientProcessBuilder.start();
