@@ -60,10 +60,6 @@ public class GSPServer implements GraphBatchProcessor {
 
     @Override
     public List<Integer> processBatch(String batch) throws RemoteException {
-        // if (!batch.endsWith("\n")) {
-        //     batch += "\n";
-        // }
-
         String[] lines = batch.split("\n");
         List<Integer> result = new ArrayList<>();
 

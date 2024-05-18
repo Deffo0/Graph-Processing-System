@@ -36,6 +36,7 @@ public class Graph {
             addEdge(src, dest);
             logger.info("Added edge: " + src + " -> " + dest);
         }
+        scanner.close();
     }
 
     public void addEdge(int src, int dest) {
@@ -64,14 +65,37 @@ public class Graph {
         lock.readLock().lock();
         try {
             if (fast)
-                return backtrackShortestPath(src, dest);
-            else
                 return BFSShortestPath(src, dest);
+            else
+                return bellmanFordShortestPath(src, dest);
         } finally {
             lock.readLock().unlock();
         }
     }
+    private int bellmanFordShortestPath(int src, int dest) {
+        lock.readLock().lock();
 
+        try {
+            Map<Integer, Integer> distance = new HashMap<>();
+            distance.put(src, 0);
+            for (int i = 0; i < adjacencyList.size() - 1; i++) {
+                for (int u : adjacencyList.keySet()) {
+                    if(!distance.containsKey(u)) continue;
+                    for (int v : adjacencyList.getOrDefault(u, Collections.emptySet())) {
+                        if (!distance.containsKey(v) || distance.get(v) > distance.get(u) + 1) {
+                            distance.put(v, distance.get(u) + 1);
+                        }
+                    }
+                }
+            }
+            return distance.getOrDefault(dest, -1);
+
+        } finally {
+            lock.readLock().unlock();
+        }
+        
+    }
+    @SuppressWarnings("unused")
     private int backtrackShortestPath(int src, int dest) {
         lock.readLock().lock();
         try {

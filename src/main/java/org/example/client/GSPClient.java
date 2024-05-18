@@ -1,7 +1,6 @@
 package org.example.client;
 
 import org.example.RMIInterface.GraphBatchProcessor;
-// import org.example.log.JsonFormatter;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -16,7 +15,7 @@ import java.util.logging.*;
 public class GSPClient {
     private static final Logger logger = Logger.getLogger(GSPClient.class.getName());
     private static Random rngRequests, rngWrites, rngSleep;
-    private static int writePercentage, maxGraphNodes, numberOfRequests;
+    private static int writePercentage, maxGraphNodes, maxNumberOfRequests;
 
     public GSPClient() {
         super();
@@ -25,7 +24,7 @@ public class GSPClient {
     public static void main(String[] args) throws NotBoundException, IOException {
         if (args.length != 8) {
             logger.severe(
-                    "Usage: java -jar client.jar <clientId> <clientAddress> <serverAddress> <rmiRegistryPort> <serviceName> <maxGraphNodes> <writePercentage> <numberOfRequests>");
+                    "Usage: java -jar client.jar <clientId> <clientAddress> <serverAddress> <rmiRegistryPort> <serviceName> <maxGraphNodes> <writePercentage> <maxNumberOfRequests>");
             return;
         }
         String clientId = args[0];
@@ -33,7 +32,7 @@ public class GSPClient {
         String serverAddress = args[2];
         int rmiRegistryPort = Integer.parseInt(args[3]);
         String name = args[4];
-        numberOfRequests = Integer.parseInt(args[7]);
+        maxNumberOfRequests = Integer.parseInt(args[7]);
         maxGraphNodes = Integer.parseInt(args[5]);
         writePercentage = Integer.parseInt(args[6]);
 
@@ -54,7 +53,7 @@ public class GSPClient {
         GraphBatchProcessor graphBatchProcessor = (GraphBatchProcessor) registry.lookup(name);
 
         // set number of requests to -ve value to run indefinitely
-        for(int i = 0; i != numberOfRequests; i++) {
+        for(int i = 0; i != maxNumberOfRequests; i++) {
             logger.info("Generating batch...");
             String batch = generateBatch(clientId);
             logger.info("Batch generated");
@@ -65,13 +64,11 @@ public class GSPClient {
                 long endTime = System.currentTimeMillis();
                 logger.info("Result: " + result.toString() + ", Time taken: " + (endTime - startTime) + "ms");
 
-                Thread.sleep(1000);
+                Thread.sleep(rngSleep.nextInt(10000) + 1000);
 
             } catch (Exception e) {
                 logger.severe("An error occurred: " + e.getLocalizedMessage());
             }
-            // break;
-
         }
     }
 
@@ -87,10 +84,10 @@ public class GSPClient {
     }
 
     private static String generateRandomInstructions(String fileName) throws Exception {
-        // int numberOfRequests = rngRequests.nextInt(8) + 2;
+        int numberOfRequestsGenerated = Math.max(rngRequests.nextInt(maxNumberOfRequests), 2);
         StringBuilder batchBuilder = new StringBuilder();
 
-        for (int i = 0; i < numberOfRequests; i++) {
+        for (int i = 0; i < numberOfRequestsGenerated; i++) {
             char operation = 'Q';
             if (rngWrites.nextInt(100) < writePercentage) {
                 operation = rngRequests.nextBoolean() ? 'A' : 'D'; // Randomly choose add or delete operation
@@ -105,32 +102,6 @@ public class GSPClient {
             writer.write(batchString);
         }
         return batchString;
-
-        // try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
-        // StringBuilder batchString = new StringBuilder();
-        // for (int i = 0; i < 10; i++) {
-        // char operation = random.nextBoolean() ? 'A' : 'D'; // Randomly choose add or
-        // delete operation
-        // int src = random.nextInt(10); // Random source node
-        // int dest = random.nextInt(10); // Random destination node
-        // writer.write(operation + " " + src + " " + dest);
-        // writer.newLine();
-        // batchString.append(operation).append(" ").append(src).append("
-        // ").append(dest).append("\n");
-        // }
-        // // Add queries for shortest path
-        // for (int i = 0; i < 5; i++) {
-        // int src = random.nextInt(10); // Random source node
-        // int dest = random.nextInt(10); // Random destination node
-        // writer.write("Q" + " " + src + " " + dest);
-        // writer.newLine();
-        // batchString.append("Q").append(" ").append(src).append("
-        // ").append(dest).append("\n");
-        // }
-        // writer.write("F");
-
-        // return batchString.toString();
-        // }
     }
 
     private static void initLogger(String clientId) throws IOException {

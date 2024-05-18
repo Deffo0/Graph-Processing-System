@@ -1,12 +1,9 @@
 package org.example;
 
-import org.example.server.GSPServer;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -23,8 +20,6 @@ public class Start {
         ProcessBuilder serverProcessBuilder = new ProcessBuilder(
                 "docker",
                 "run",
-                // "-d",
-                // "org.example.server.GSPServer",
                 "--name",
                 "gsp-server",
                 "--network",
@@ -54,16 +49,6 @@ public class Start {
                 }
             }
         }
-        // System.out.println();
-        // GSPServer.main(
-        //         new String[] {
-        //                 configuration.getServerAddress(),
-        //                 String.valueOf(configuration.getServerPort()),
-        //                 String.valueOf(configuration.getRmiRegistryPort())
-        //         }
-        // );
-        // logger.info("Server started.");
-        // Thread.sleep(5000);
 
         try {
             logger.info("Starting clients...");
