@@ -7,7 +7,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.logging.Logger;
 
 public class Graph {
-    private final Map<Integer, List<Integer>> adjacencyList;
+    private final Map<Integer, Set<Integer>> adjacencyList;
     private static Logger logger;
     private final ReentrantReadWriteLock lock;
 
@@ -41,7 +41,7 @@ public class Graph {
     public void addEdge(int src, int dest) {
         lock.writeLock().lock();
         try {
-            adjacencyList.putIfAbsent(src, new ArrayList<>());
+            adjacencyList.putIfAbsent(src, new HashSet<>());
             adjacencyList.get(src).add(dest);
         } finally {
             lock.writeLock().unlock();
@@ -51,9 +51,9 @@ public class Graph {
     public void removeEdge(int src, int dest) {
         lock.writeLock().lock();
         try {
-            List<Integer> neighbors = adjacencyList.get(src);
+            Set<Integer> neighbors = adjacencyList.get(src);
             if (neighbors != null) {
-                neighbors.remove((Integer) dest);
+                neighbors.remove(dest);
             }
         } finally {
             lock.writeLock().unlock();
@@ -91,7 +91,7 @@ public class Graph {
             return;
         }
 
-        for (int neighbor : adjacencyList.getOrDefault(current, Collections.emptyList())) {
+        for (int neighbor : adjacencyList.getOrDefault(current, Collections.emptySet())) {
             if (!path.contains(neighbor)) {
                 path.add(neighbor);
                 backtrackShortestPathUtil(neighbor, dest, path, distance + 1, minDist);
@@ -117,7 +117,7 @@ public class Graph {
                 if (current == dest) {
                     return distance.get(current);
                 }
-                for (int neighbor : adjacencyList.get(current)) {
+                for (int neighbor : adjacencyList.getOrDefault(current, Collections.emptySet())) {
                     if (!distance.containsKey(neighbor)) {
                         distance.put(neighbor, distance.get(current) + 1);
                         queue.offer(neighbor);

@@ -25,6 +25,8 @@ public class Start {
                 "run",
                 // "-d",
                 // "org.example.server.GSPServer",
+                "--name",
+                "gsp-server",
                 "--network",
                 "gsp",
                 "--ip",

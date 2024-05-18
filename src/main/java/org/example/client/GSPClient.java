@@ -1,7 +1,7 @@
 package org.example.client;
 
 import org.example.RMIInterface.GraphBatchProcessor;
-import org.example.log.JsonFormatter;
+// import org.example.log.JsonFormatter;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -65,10 +65,10 @@ public class GSPClient {
                 long endTime = System.currentTimeMillis();
                 logger.info("Result: " + result.toString() + ", Time taken: " + (endTime - startTime) + "ms");
 
-                Thread.sleep(rngSleep.nextInt(9000) + 1000);
+                Thread.sleep(1000);
 
             } catch (Exception e) {
-                logger.severe("An error occurred: " + e.getMessage());
+                logger.severe("An error occurred: " + e.getLocalizedMessage());
             }
             // break;
 
@@ -87,7 +87,7 @@ public class GSPClient {
     }
 
     private static String generateRandomInstructions(String fileName) throws Exception {
-        int numberOfRequests = rngRequests.nextInt(8) + 2;
+        // int numberOfRequests = rngRequests.nextInt(8) + 2;
         StringBuilder batchBuilder = new StringBuilder();
 
         for (int i = 0; i < numberOfRequests; i++) {
@@ -135,7 +135,7 @@ public class GSPClient {
 
     private static void initLogger(String clientId) throws IOException {
         Handler fileHandler = new FileHandler("src/main/resources/GSPClient_" + clientId + ".log");
-        fileHandler.setFormatter(new JsonFormatter());
+        fileHandler.setFormatter(new SimpleFormatter());
         logger.addHandler(fileHandler);
         logger.setLevel(Level.INFO);
     }

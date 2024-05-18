@@ -15,4 +15,4 @@ src/main/resources/instructions_3.txt
 # Compiled class file
 *.class
 
-src/main/resources/GSPServer.log.lck
+src/main/resources/*.lck
