@@ -1,0 +1,214 @@
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+INFO: Client started
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+INFO: Client ID: 9
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+INFO: Server address: 173.18.0.2
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+INFO: RMI registry port: 1099
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+INFO: Service name: GSP
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+INFO: Connecting to server...
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+INFO: Looking up service: GSP
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+INFO: Generating batch...
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+INFO: Batch generated
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+INFO: Processing batch:
+Q 4 1
+Q 13 10
+A 12 8
+A 13 13
+Q 11 1
+A 13 5
+Q 8 11
+D 14 9
+D 1 11
+Q 7 11
+F
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+SEVERE: An error occurred: Connection refused to host: 173.18.0.2; nested exception is: 
+	java.net.ConnectException: Connection refused
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+INFO: Generating batch...
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+INFO: Batch generated
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+INFO: Processing batch:
+A 12 8
+Q 3 7
+D 0 6
+Q 7 5
+A 8 0
+Q 0 11
+Q 7 2
+D 5 14
+Q 11 14
+A 5 13
+F
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+SEVERE: An error occurred: Connection refused to host: 173.18.0.2; nested exception is: 
+	java.net.ConnectException: Connection refused
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+INFO: Generating batch...
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+INFO: Batch generated
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+INFO: Processing batch:
+A 13 3
+Q 4 3
+Q 6 5
+D 2 8
+A 3 1
+Q 5 14
+Q 3 14
+Q 7 0
+D 3 8
+D 10 14
+F
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+SEVERE: An error occurred: Connection refused to host: 173.18.0.2; nested exception is: 
+	java.net.ConnectException: Connection refused
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+INFO: Generating batch...
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+INFO: Batch generated
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+INFO: Processing batch:
+Q 9 11
+Q 4 6
+Q 12 12
+Q 13 3
+Q 8 4
+D 8 1
+Q 1 6
+Q 6 13
+Q 8 10
+D 7 13
+F
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+SEVERE: An error occurred: Connection refused to host: 173.18.0.2; nested exception is: 
+	java.net.ConnectException: Connection refused
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+INFO: Generating batch...
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+INFO: Batch generated
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+INFO: Processing batch:
+Q 10 7
+Q 11 10
+A 5 10
+Q 7 0
+Q 5 14
+Q 12 6
+Q 11 8
+D 4 9
+Q 2 7
+Q 12 9
+F
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+SEVERE: An error occurred: Connection refused to host: 173.18.0.2; nested exception is: 
+	java.net.ConnectException: Connection refused
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+INFO: Generating batch...
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+INFO: Batch generated
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+INFO: Processing batch:
+A 13 7
+Q 3 2
+D 5 11
+Q 8 14
+Q 1 11
+Q 6 9
+D 1 0
+D 4 2
+Q 12 3
+D 7 6
+F
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+SEVERE: An error occurred: Connection refused to host: 173.18.0.2; nested exception is: 
+	java.net.ConnectException: Connection refused
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+INFO: Generating batch...
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+INFO: Batch generated
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+INFO: Processing batch:
+A 2 3
+A 1 14
+Q 3 1
+D 8 4
+D 5 14
+A 4 1
+Q 0 7
+Q 7 11
+A 4 12
+Q 11 3
+F
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+SEVERE: An error occurred: Connection refused to host: 173.18.0.2; nested exception is: 
+	java.net.ConnectException: Connection refused
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+INFO: Generating batch...
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+INFO: Batch generated
+May 18, 2024 6:06:10 AM org.example.client.GSPClient main
+INFO: Processing batch:
+Q 8 4
+A 9 12
+Q 6 6
+A 14 13
+D 11 12
+Q 3 2
+D 9 11
+A 10 11
+Q 3 8
+Q 6 0
+F
+May 18, 2024 6:06:15 AM org.example.client.GSPClient main
+SEVERE: An error occurred: Exception creating connection to: 173.18.0.2; nested exception is: 
+	java.net.NoRouteToHostException: No route to host
+May 18, 2024 6:06:15 AM org.example.client.GSPClient main
+INFO: Generating batch...
+May 18, 2024 6:06:15 AM org.example.client.GSPClient main
+INFO: Batch generated
+May 18, 2024 6:06:15 AM org.example.client.GSPClient main
+INFO: Processing batch:
+Q 11 2
+D 9 9
+Q 8 5
+A 2 4
+A 10 13
+Q 13 11
+A 4 4
+D 2 6
+Q 13 1
+A 13 10
+F
+May 18, 2024 6:06:18 AM org.example.client.GSPClient main
+SEVERE: An error occurred: Exception creating connection to: 173.18.0.2; nested exception is: 
+	java.net.NoRouteToHostException: No route to host
+May 18, 2024 6:06:18 AM org.example.client.GSPClient main
+INFO: Generating batch...
+May 18, 2024 6:06:18 AM org.example.client.GSPClient main
+INFO: Batch generated
+May 18, 2024 6:06:18 AM org.example.client.GSPClient main
+INFO: Processing batch:
+Q 2 4
+D 3 4
+Q 2 2
+D 5 3
+Q 4 9
+Q 10 5
+Q 8 11
+Q 9 5
+A 2 6
+Q 6 2
+F
+May 18, 2024 6:06:21 AM org.example.client.GSPClient main
+SEVERE: An error occurred: Exception creating connection to: 173.18.0.2; nested exception is: 
+	java.net.NoRouteToHostException: No route to host

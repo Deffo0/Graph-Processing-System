@@ -1,0 +1,204 @@
+May 18, 2024 5:11:36 AM org.example.client.GSPClient main
+INFO: Client started
+May 18, 2024 5:11:36 AM org.example.client.GSPClient main
+INFO: Client ID: 0
+May 18, 2024 5:11:36 AM org.example.client.GSPClient main
+INFO: Server address: 173.18.0.2
+May 18, 2024 5:11:36 AM org.example.client.GSPClient main
+INFO: RMI registry port: 1099
+May 18, 2024 5:11:36 AM org.example.client.GSPClient main
+INFO: Service name: GSP
+May 18, 2024 5:11:36 AM org.example.client.GSPClient main
+INFO: Connecting to server...
+May 18, 2024 5:11:36 AM org.example.client.GSPClient main
+INFO: Looking up service: GSP
+May 18, 2024 5:11:36 AM org.example.client.GSPClient main
+INFO: Generating batch...
+May 18, 2024 5:11:36 AM org.example.client.GSPClient main
+INFO: Batch generated
+May 18, 2024 5:11:36 AM org.example.client.GSPClient main
+INFO: Processing batch:
+Q 0 13
+Q 4 2
+A 8 11
+D 9 14
+D 2 8
+A 5 14
+Q 4 0
+A 5 13
+D 14 2
+Q 2 10
+F
+May 18, 2024 5:11:36 AM org.example.client.GSPClient main
+INFO: Result: [-1, 6, -1, 9], Time taken: 25ms
+May 18, 2024 5:11:37 AM org.example.client.GSPClient main
+INFO: Generating batch...
+May 18, 2024 5:11:37 AM org.example.client.GSPClient main
+INFO: Batch generated
+May 18, 2024 5:11:37 AM org.example.client.GSPClient main
+INFO: Processing batch:
+D 7 12
+Q 8 5
+A 2 2
+Q 2 2
+D 8 13
+Q 0 5
+Q 10 5
+A 13 6
+Q 4 1
+A 12 4
+F
+May 18, 2024 5:11:37 AM org.example.client.GSPClient main
+INFO: Result: [7, 0, -1, 6, 3], Time taken: 11ms
+May 18, 2024 5:11:38 AM org.example.client.GSPClient main
+INFO: Generating batch...
+May 18, 2024 5:11:38 AM org.example.client.GSPClient main
+INFO: Batch generated
+May 18, 2024 5:11:38 AM org.example.client.GSPClient main
+INFO: Processing batch:
+D 11 6
+Q 12 1
+Q 13 2
+D 7 2
+D 10 3
+Q 3 12
+Q 1 8
+Q 13 3
+D 7 2
+A 11 0
+F
+May 18, 2024 5:11:38 AM org.example.client.GSPClient main
+INFO: Result: [4, 2, 4, 6, 7], Time taken: 5ms
+May 18, 2024 5:11:39 AM org.example.client.GSPClient main
+INFO: Generating batch...
+May 18, 2024 5:11:39 AM org.example.client.GSPClient main
+INFO: Batch generated
+May 18, 2024 5:11:39 AM org.example.client.GSPClient main
+INFO: Processing batch:
+D 12 10
+A 7 3
+Q 12 4
+Q 0 12
+Q 4 13
+D 1 3
+Q 10 3
+D 11 13
+Q 12 12
+A 6 11
+F
+May 18, 2024 5:11:39 AM org.example.client.GSPClient main
+INFO: Result: [1, 6, 5, 5, 0], Time taken: 4ms
+May 18, 2024 5:11:40 AM org.example.client.GSPClient main
+INFO: Generating batch...
+May 18, 2024 5:11:40 AM org.example.client.GSPClient main
+INFO: Batch generated
+May 18, 2024 5:11:40 AM org.example.client.GSPClient main
+INFO: Processing batch:
+D 14 8
+Q 12 7
+D 12 3
+A 10 5
+A 1 7
+Q 7 6
+Q 1 0
+D 6 14
+Q 5 10
+Q 1 14
+F
+May 18, 2024 5:11:40 AM org.example.client.GSPClient main
+INFO: Result: [5, 2, -1, 4, 2], Time taken: 9ms
+May 18, 2024 5:11:41 AM org.example.client.GSPClient main
+INFO: Generating batch...
+May 18, 2024 5:11:41 AM org.example.client.GSPClient main
+INFO: Batch generated
+May 18, 2024 5:11:41 AM org.example.client.GSPClient main
+INFO: Processing batch:
+A 2 7
+Q 0 3
+D 9 5
+A 10 5
+Q 2 4
+Q 9 7
+D 11 8
+D 13 6
+Q 11 5
+D 1 13
+F
+May 18, 2024 5:11:41 AM org.example.client.GSPClient main
+INFO: Result: [3, 3, 5, 4], Time taken: 5ms
+May 18, 2024 5:11:42 AM org.example.client.GSPClient main
+INFO: Generating batch...
+May 18, 2024 5:11:42 AM org.example.client.GSPClient main
+INFO: Batch generated
+May 18, 2024 5:11:42 AM org.example.client.GSPClient main
+INFO: Processing batch:
+A 2 8
+A 1 8
+Q 5 0
+D 0 3
+A 5 5
+D 10 11
+Q 1 3
+Q 7 8
+A 7 4
+Q 9 1
+F
+May 18, 2024 5:11:42 AM org.example.client.GSPClient main
+INFO: Result: [-1, 2, 5, 4], Time taken: 4ms
+May 18, 2024 5:11:43 AM org.example.client.GSPClient main
+INFO: Generating batch...
+May 18, 2024 5:11:43 AM org.example.client.GSPClient main
+INFO: Batch generated
+May 18, 2024 5:11:43 AM org.example.client.GSPClient main
+INFO: Processing batch:
+A 1 2
+D 13 11
+A 8 4
+A 5 13
+D 10 13
+D 13 2
+A 4 9
+D 10 2
+Q 9 8
+Q 3 0
+F
+May 18, 2024 5:11:43 AM org.example.client.GSPClient main
+INFO: Result: [5, -1], Time taken: 7ms
+May 18, 2024 5:11:44 AM org.example.client.GSPClient main
+INFO: Generating batch...
+May 18, 2024 5:11:44 AM org.example.client.GSPClient main
+INFO: Batch generated
+May 18, 2024 5:11:44 AM org.example.client.GSPClient main
+INFO: Processing batch:
+D 1 8
+A 9 14
+Q 12 3
+A 2 9
+A 10 5
+A 5 7
+A 2 12
+D 3 4
+Q 2 5
+D 12 0
+F
+May 18, 2024 5:11:44 AM org.example.client.GSPClient main
+INFO: Result: [4, 2], Time taken: 16ms
+May 18, 2024 5:11:45 AM org.example.client.GSPClient main
+INFO: Generating batch...
+May 18, 2024 5:11:45 AM org.example.client.GSPClient main
+INFO: Batch generated
+May 18, 2024 5:11:45 AM org.example.client.GSPClient main
+INFO: Processing batch:
+A 8 3
+A 2 0
+A 2 5
+A 9 3
+A 2 5
+D 4 6
+Q 14 8
+A 8 13
+D 1 6
+Q 12 9
+F
+May 18, 2024 5:11:45 AM org.example.client.GSPClient main
+INFO: Result: [3, 2], Time taken: 5ms

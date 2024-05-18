@@ -1,0 +1,14 @@
+May 18, 2024 6:01:16 AM org.example.client.GSPClient main
+INFO: Client started
+May 18, 2024 6:01:16 AM org.example.client.GSPClient main
+INFO: Client ID: 9
+May 18, 2024 6:01:16 AM org.example.client.GSPClient main
+INFO: Server address: 173.18.0.2
+May 18, 2024 6:01:16 AM org.example.client.GSPClient main
+INFO: RMI registry port: 1099
+May 18, 2024 6:01:16 AM org.example.client.GSPClient main
+INFO: Service name: GSP
+May 18, 2024 6:01:16 AM org.example.client.GSPClient main
+INFO: Connecting to server...
+May 18, 2024 6:01:16 AM org.example.client.GSPClient main
+INFO: Looking up service: GSP
