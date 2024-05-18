@@ -1,8 +1,8 @@
 package org.example;
 
-import org.example.server.GSPServer;
-
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -13,28 +13,42 @@ public class Start {
 
         Configuration configuration = new Configuration();
         String classpath = System.getProperty("java.class.path");
-        
-        // ProcessBuilder serverProcessBuilder = new ProcessBuilder(
-        //         "java",
-        //         "-cp",
-        //         classpath,
-        //         "org.example.server.GSPServer",
-        //         configuration.getServerAddress(),
-        //         String.valueOf(configuration.getServerPort()),
-        //         String.valueOf(configuration.getRmiRegistryPort())
-        // );
-        // serverProcessBuilder.redirectErrorStream(true);
-        // Process serverProcess = serverProcessBuilder.start();
+
         logger.info("Starting server...");
-        GSPServer.main(
-                new String[] {
-                        configuration.getServerAddress(),
-                        String.valueOf(configuration.getServerPort()),
-                        String.valueOf(configuration.getRmiRegistryPort())
-                }
+
+        
+        ProcessBuilder serverProcessBuilder = new ProcessBuilder(
+                "docker",
+                "run",
+                "--name",
+                "gsp-server",
+                "--network",
+                "gsp",
+                "--ip",
+                configuration.getServerAddress(),
+                "--expose",
+                String.valueOf(configuration.getServerPort()),
+                "--expose",
+                String.valueOf(configuration.getRmiRegistryPort()),
+                "gsp-server",
+                configuration.getServerAddress(),
+                String.valueOf(configuration.getServerPort()),
+                String.valueOf(configuration.getRmiRegistryPort())
         );
-        logger.info("Server started.");
-        Thread.sleep(2000);
+        System.out.println(serverProcessBuilder.command());
+        serverProcessBuilder.redirectErrorStream(true);
+        Process serverProcess = serverProcessBuilder.start();
+
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(serverProcess.getInputStream()))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(" ");
+                if(parts.length == 2 && parts[1].toLowerCase().equals("r")){
+                    logger.info("Server started.");
+                    break;
+                }
+            }
+        }
 
         try {
             logger.info("Starting clients...");
@@ -45,7 +59,8 @@ public class Start {
             }
             logger.info("All clients finished.");
 
-            // serverProcess.waitFor();
+            serverProcess.waitFor();
+          
         } catch (IOException | InterruptedException e) {
             logger.severe("An error occurred: " + e.getMessage());
         } finally {
@@ -69,7 +84,10 @@ public class Start {
                     nodeAddress,
                     configuration.getServerAddress(),
                     String.valueOf(configuration.getRmiRegistryPort()),
-                    configuration.getServerName()
+                    configuration.getServerName(),
+                    String.valueOf(configuration.getMaxGraphNodes()),
+                    String.valueOf(configuration.getWritePercentage()),
+                    "10"
             );
             clientProcessBuilder.redirectErrorStream(true);
             Process clientProcess = clientProcessBuilder.start();

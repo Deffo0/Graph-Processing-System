@@ -1,8 +1,6 @@
 package org.example.server;
 
 import org.example.RMIInterface.GraphBatchProcessor;
-import org.example.log.AnalysisLevel;
-import org.example.log.JsonFormatter;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
@@ -55,26 +53,37 @@ public class GSPServer implements GraphBatchProcessor {
 
     private static void initLogger() throws IOException {
         Handler fileHandler = new FileHandler("src/main/resources/GSPServer.log");
-        fileHandler.setFormatter(new JsonFormatter());
+        fileHandler.setFormatter(new SimpleFormatter());
+      
         logger.addHandler(fileHandler);
         logger.setLevel(Level.INFO);
     }
 
     @Override
     public List<Integer> processBatch(String batch) throws RemoteException {
-        if (!batch.endsWith("\n")) {
-            batch += "\n";
-        }
-
         String[] lines = batch.split("\n");
         List<Integer> result = new ArrayList<>();
 
         for (String line : lines) {
             logger.info("Processing line: " + line);
+            if(line.trim().isEmpty()){
+                logger.warning("Empty line");
+                continue;
+            }
             String[] parts = line.split(" ");
             char operation = parts[0].charAt(0);
-            int src = Integer.parseInt(parts[1]);
-            int dest = Integer.parseInt(parts[2]);
+
+            int src = -1, dest = -1;
+            if(operation == 'Q' || operation == 'A' || operation == 'D'){
+                if(parts.length == 3){
+                    src = Integer.parseInt(parts[1]);
+                    dest = Integer.parseInt(parts[2]);
+                }else{
+                    logger.warning("Invalid operation: " + operation);
+                    continue;
+                }
+            }
+
             long operationStartTime = System.currentTimeMillis();
 
             switch (operation) {
@@ -83,7 +92,6 @@ public class GSPServer implements GraphBatchProcessor {
                     int distance = graph.shortestPath(src, dest, false);
                     result.add(distance);
                     logger.info("Shortest path from " + src + " to " + dest + ": " + distance);
-                    logger.log(AnalysisLevel.ANALYSIS, "This is an ANALYSIS message");
 
                     logger.info("Finished in  " + (System.currentTimeMillis()-operationStartTime) + " milliseconds");
                     break;
