@@ -24,7 +24,7 @@ The Graph Processing System (GSP) is a Java-based distributed system designed to
 3. **Network Adapter**: The server needs a network adapter to be created in the host machine. Run the following command to create a network adapter named 'gsp-net'. Make sure that the server's IP address is in the same subnet as the network adapter.
 
 3. **Starting the Application**: Run Start.java to start the docker container of the server. It waits for the server to be up and running by waiting for the R signaled from the server. Then it starts the clients to send requests to the server.
-5. **Adding/Removing Edges**: Use the format <Operation> <Source Node> <Destination Node> in the instructions file. Replace <Operation> with 'A' for adding an edge and 'D' for removing an edge.
-6. **Querying Shortest Path**: Use the format Q <Source Node> <Destination Node> in the instructions file to query the shortest path between two nodes.
+5. **Adding/Removing Edges**: Use the format `<Operation> <Source Node> <Destination Node>` in the instructions file. Replace `<Operation>` with 'A' for adding an edge and 'D' for removing an edge.
+6. **Querying Shortest Path**: Use the format `Q <Source Node> <Destination Node>` in the instructions file to query the shortest path between two nodes.
 7. **Performance Measurement**: The client measures the time taken to execute each batch of instructions and logs the results.
 8. **Sleep Interval**: After completing each batch of instructions, the client sleeps for a random duration between 1 to 10 seconds before starting the next batch.
