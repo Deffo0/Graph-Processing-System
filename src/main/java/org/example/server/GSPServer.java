@@ -54,6 +54,7 @@ public class GSPServer implements GraphBatchProcessor {
     private static void initLogger() throws IOException {
         Handler fileHandler = new FileHandler("src/main/resources/GSPServer.log");
         fileHandler.setFormatter(new SimpleFormatter());
+      
         logger.addHandler(fileHandler);
         logger.setLevel(Level.INFO);
     }
@@ -81,7 +82,6 @@ public class GSPServer implements GraphBatchProcessor {
                     logger.warning("Invalid operation: " + operation);
                     continue;
                 }
-
             }
 
             long operationStartTime = System.currentTimeMillis();

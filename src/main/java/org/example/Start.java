@@ -60,6 +60,7 @@ public class Start {
             logger.info("All clients finished.");
 
             serverProcess.waitFor();
+          
         } catch (IOException | InterruptedException e) {
             logger.severe("An error occurred: " + e.getMessage());
         } finally {

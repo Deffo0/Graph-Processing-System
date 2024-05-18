@@ -72,6 +72,7 @@ public class Graph {
             lock.readLock().unlock();
         }
     }
+
     private int bellmanFordShortestPath(int src, int dest) {
         lock.readLock().lock();
 
@@ -93,8 +94,8 @@ public class Graph {
         } finally {
             lock.readLock().unlock();
         }
-        
     }
+  
     @SuppressWarnings("unused")
     private int backtrackShortestPath(int src, int dest) {
         lock.readLock().lock();
@@ -141,6 +142,7 @@ public class Graph {
                 if (current == dest) {
                     return distance.get(current);
                 }
+
                 for (int neighbor : adjacencyList.getOrDefault(current, Collections.emptySet())) {
                     if (!distance.containsKey(neighbor)) {
                         distance.put(neighbor, distance.get(current) + 1);

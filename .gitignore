@@ -7,6 +7,7 @@ target/
 DS_Project.iml
 *.iml
 *.log
+
 src/main/resources/instructions_*.txt
 
 # Compiled class file

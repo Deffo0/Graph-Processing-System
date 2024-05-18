@@ -1,7 +1,6 @@
 package org.example.client;
 
 import org.example.RMIInterface.GraphBatchProcessor;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,7 +15,7 @@ public class GSPClient {
     private static final Logger logger = Logger.getLogger(GSPClient.class.getName());
     private static Random rngRequests, rngWrites, rngSleep;
     private static int writePercentage, maxGraphNodes, maxNumberOfRequests;
-
+  
     public GSPClient() {
         super();
     }
@@ -107,6 +106,7 @@ public class GSPClient {
     private static void initLogger(String clientId) throws IOException {
         Handler fileHandler = new FileHandler("src/main/resources/GSPClient_" + clientId + ".log");
         fileHandler.setFormatter(new SimpleFormatter());
+
         logger.addHandler(fileHandler);
         logger.setLevel(Level.INFO);
     }
