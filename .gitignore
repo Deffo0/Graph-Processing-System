@@ -4,3 +4,9 @@ out/
 DS_Project.iml
 *.iml
 *.log
+src/main/resources/instructions_0.txt
+src/main/resources/instructions_1.txt
+src/main/resources/instructions_2.txt
+src/main/resources/instructions_3.txt
+/target
+src/main/resources/GSPServer.log.lck
